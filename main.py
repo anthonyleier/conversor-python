@@ -1,7 +1,6 @@
 import sys
 from classes.empresa import Empresa
-from funcoes import leituraArquivo, gerarRelatorio
-from layout import montarTabela1
+from classes.geradorRelatorio import GeradorRelatorio
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
@@ -10,12 +9,20 @@ if __name__ == "__main__":
     arquivoEntrada = sys.argv[1]
     arquivoSaida = sys.argv[2]
 
-    infos = leituraArquivo(arquivoEntrada)
-    html = montarTabela1(infos)
+    with open(arquivoEntrada, 'r') as arquivo:
+        linhasArquivo = arquivo.readlines()
 
-    with open(arquivoSaida, 'w') as arquivo:
-        arquivo.write(html)
+    for linha in linhasArquivo:
+        if linha[7:8] == "0":
+            empresa = Empresa(linha)
 
-    # empresa = Empresa(cabecalho)
-    # empresa.adicionarDetalhes(detalhes)
-    # empresa.gerarRelatorio(arquivoSaida)
+        if linha[7:8] == "1":
+            empresa.inserirEndereco(linha)
+
+        if linha[7:8] == "3":
+            empresa.adicionarPagamento(linha)
+
+    geradorRelatorio = GeradorRelatorio()
+    geradorRelatorio.montarTabelaEmpresa(empresa)
+    geradorRelatorio.montarTabelaPagamentos(empresa.listaPagamentos)
+    geradorRelatorio.montarHTML(arquivoSaida)
