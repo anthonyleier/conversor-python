@@ -9,17 +9,22 @@ if __name__ == "__main__":
     arquivoEntrada = sys.argv[1]
     arquivoSaida = sys.argv[2]
 
-    with open(arquivoEntrada, 'r') as arquivo:
+    with open(arquivoEntrada, 'r', encoding='utf-8') as arquivo:
         linhasArquivo = arquivo.readlines()
 
     for linha in linhasArquivo:
-        if linha[7:8] == "0":
+        tipoRegistro = linha[7:8]
+
+        # Header de Arquivo
+        if tipoRegistro == "0":
             empresa = Empresa(linha)
 
-        if linha[7:8] == "1":
+        # Header de Lote
+        if tipoRegistro == "1":
             empresa.inserirEndereco(linha)
 
-        if linha[7:8] == "3":
+        # Registro de Detalhe
+        if tipoRegistro == "3":
             empresa.adicionarPagamento(linha)
 
     geradorRelatorio = GeradorRelatorio()
