@@ -7,18 +7,26 @@ from classes.pagamento import Pagamento
 
 arquivoTeste = 'entrada.txt'
 
-tabelaEmpresa = "<table><tr><th>Nome da Empresa</th><th>Numero de Inscricao da Empresa</th><th>Nome do Banco</th><th>Nome da Rua</th><th>Numero do Local</th><th>Nome da Cidade</th><th>CEP</th><th>Sigla do Estado</th></tr><tr><td>GRUPO NEXXERA</td><td>95.774.212/0001-32</td><td>HSBC</td><td>Rua Madalena Barbi</td><td>181</td><td>Centro-Florianopolis</td><td>88015-190</td><td>SC</td></tr></table>"
-tabelaPagamentos = "<table><tr><th>Nome do Favorecido</th><th>Data de Pagamento</th><th>Valor do Pagamento</th><th>Numero do Documento Atribuido pela Empresa</th><th>Forma de Lancamento</th></tr><tr><td>EMPRESA FORNECEDOR 1</td><td>07/06/2017</td><td>R$ 0,10</td><td>0000000001</td><td>Crédito em Conta Corrente</td></tr></table>"
-
-htmlParcial = "<html><body><br><table><tr><th>Nome da Empresa</th><th>Numero de Inscricao da Empresa</th><th>Nome do Banco</th><th>Nome da Rua</th><th>Numero do Local</th><th>Nome da Cidade</th><th>CEP</th><th>Sigla do Estado</th></tr><tr><td>GRUPO NEXXERA</td><td>95.774.212/0001-32</td><td>HSBC</td><td>Rua Madalena Barbi</td><td>181</td><td>Centro-Florianopolis</td><td>88015-190</td><td>SC</td></tr></table><br><br><table><tr><th>Nome do Favorecido</th><th>Data de Pagamento</th><th>Valor do Pagamento</th><th>Numero do Documento Atribuido pela Empresa</th><th>Forma de Lancamento</th></tr><tr><td>EMPRESA FORNECEDOR 1</td><td>07/06/2017</td><td>R$ 0,10</td><td>0000000001</td><td>Crédito em Conta Corrente</td></tr></table><br><style> table, th, td { border: 1px solid black; } </style></body></html>"
-htmlCompleto = "<html><body><br><table><tr><th>Nome da Empresa</th><th>Numero de Inscricao da Empresa</th><th>Nome do Banco</th><th>Nome da Rua</th><th>Numero do Local</th><th>Nome da Cidade</th><th>CEP</th><th>Sigla do Estado</th></tr><tr><td>GRUPO NEXXERA</td><td>95.774.212/0001-32</td><td>HSBC</td><td>Rua Madalena Barbi</td><td>181</td><td>Centro-Florianopolis</td><td>88015-190</td><td>SC</td></tr></table><br><br><table><tr><th>Nome do Favorecido</th><th>Data de Pagamento</th><th>Valor do Pagamento</th><th>Numero do Documento Atribuido pela Empresa</th><th>Forma de Lancamento</th></tr><tr><td>EMPRESA FORNECEDOR 1</td><td>07/06/2017</td><td>R$ 0,10</td><td>0000000001</td><td>Crédito em Conta Corrente</td></tr><tr><td>EMPRESA FORNECEDOR 2</td><td>07/06/2017</td><td>R$ 200,20</td><td>0000000002</td><td>Crédito em Conta Corrente</td></tr><tr><td>EMPRESA FORNECEDOR 3</td><td>07/06/2017</td><td>R$ 30.300,30</td><td>0000000003</td><td>Crédito em Conta Corrente</td></tr></table><br><style> table, th, td { border: 1px solid black; } </style></body></html>"
-
 
 def lerLinha(index):
     index -= 1
     with open(arquivoTeste, 'r', encoding='utf-8') as arquivo:
         linhas = arquivo.readlines()
     return linhas[index]
+
+
+def lerResposta():
+    with open('resposta.html', 'r', encoding='utf-8') as arquivo:
+        dados = arquivo.read()
+    return dados
+
+
+def removeTags(stringHTML):
+    stringHTML = stringHTML.replace("<html>", "")
+    stringHTML = stringHTML.replace("<body>", "")
+    stringHTML = stringHTML.replace("<br>", "")
+    stringHTML = stringHTML.replace("</table>", "")
+    return stringHTML
 
 
 class PagamentoTestes(unittest.TestCase):
@@ -74,7 +82,8 @@ class RelatorioTestes(unittest.TestCase):
         empresa.inserirEndereco(linha)
         relatorio = Relatorio()
         relatorio.montarTabelaEmpresa(empresa)
-        self.assertIn(tabelaEmpresa, relatorio.html)
+        resposta = lerResposta()
+        self.assertIn(relatorio.html, resposta)
 
     def test_montarTabelaPagamentos(self):
         linha = lerLinha(1)
@@ -85,7 +94,8 @@ class RelatorioTestes(unittest.TestCase):
         empresa.adicionarPagamento(linha)
         relatorio = Relatorio()
         relatorio.montarTabelaPagamentos(empresa.listaPagamentos)
-        self.assertIn(tabelaPagamentos, relatorio.html)
+        resposta = lerResposta()
+        self.assertIn(removeTags(relatorio.html), resposta)
 
     def test_montarHTML(self):
         linha = lerLinha(1)
@@ -98,7 +108,8 @@ class RelatorioTestes(unittest.TestCase):
         relatorio.montarTabelaEmpresa(empresa)
         relatorio.montarTabelaPagamentos(empresa.listaPagamentos)
         relatorio.montarHTML('saida.html')
-        self.assertIn(relatorio.html, htmlParcial)
+        resposta = lerResposta()
+        self.assertIn(relatorio.html, resposta)
 
 
 class MainTestes(unittest.TestCase):
@@ -106,7 +117,12 @@ class MainTestes(unittest.TestCase):
         arquivoEntrada = 'entrada.txt'
         arquivoSaida = 'saida.html'
         html = tratamentoArquivos(arquivoEntrada, arquivoSaida)
-        self.assertEqual(html, htmlCompleto)
+        resposta = lerResposta()
+        self.assertEqual(html, resposta)
+
+
+class FormatarTestes(unittest.TestCase):
+    pass
 
 
 if __name__ == '__main__':

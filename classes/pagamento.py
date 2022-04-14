@@ -10,5 +10,8 @@ class Pagamento():
         self.forma = "Desconhecido"
 
     def __str__(self):
-        string = f"{self.nomeFavorecido} | {self.data} | {self.valor} | {self.numero} | {self.forma}"
+        string = ""
+        string += f"{self.nomeFavorecido} | {self.data}"
+        string += " | "
+        string += f"{self.valor} | {self.numero} | {self.forma}"
         return string

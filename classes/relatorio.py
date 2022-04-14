@@ -1,7 +1,13 @@
 class Relatorio():
     def __init__(self):
         self.html = "<html><body>"
-        self.css = "<style> table, th, td { border: 1px solid black; } </style>"
+        self.css = """
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+        """
 
     def montarTabelaEmpresa(self, empresa):
         cabecalho = ""
@@ -60,7 +66,7 @@ class Relatorio():
                 arquivo.write(self.html)
 
         except Exception as erro:
-            mensagem = f"Não foi possível gravar o arquivo de saída ({caminho}): {erro}"
+            mensagem = f"Erro ao gravar o arquivo ({caminho}): {erro}"
             print(mensagem)
 
         return self.html

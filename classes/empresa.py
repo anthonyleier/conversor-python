@@ -1,5 +1,5 @@
 from classes.pagamento import Pagamento
-from formatar import formatarTexto, formatarCNPJ, formatarFormaPagamento, formatarData, formatarMoeda
+from formatar import formatarTexto, formatarCNPJ, formatarFormaPagamento
 
 
 class Empresa():
@@ -25,5 +25,8 @@ class Empresa():
         self.listaPagamentos.append(pagamento)
 
     def __str__(self):
-        string = f"{self.nome} | {self.cnpj} | {self.banco} | {self.listaPagamentos}"
+        string = ""
+        string += f"{self.nome} | {self.cnpj}"
+        string += " | "
+        string += f"{self.banco} | {self.listaPagamentos}"
         return string
