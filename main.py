@@ -1,3 +1,4 @@
+import os
 import sys
 from classes.empresa import Empresa
 from classes.relatorio import Relatorio
@@ -48,5 +49,8 @@ if __name__ == "__main__":
 
     arquivoEntrada = sys.argv[1]
     arquivoSaida = sys.argv[2]
+
+    if not os.path.exists(arquivoEntrada):
+        sys.exit(f"Arquivo de entrada não encontrado ({arquivoEntrada})")
 
     tratamentoArquivos(arquivoEntrada, arquivoSaida)
