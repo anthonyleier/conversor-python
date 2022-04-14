@@ -13,14 +13,17 @@ def tratamentoArquivos(arquivoEntrada, arquivoSaida):
 
             # Header de Arquivo
             if tipoRegistro == "0":
+                print("Criando a estrutura da empresa...")
                 empresa = Empresa(linha)
 
             # Header de Lote
             if tipoRegistro == "1":
+                print("Preenchendo os dados de endereço...")
                 empresa.inserirEndereco(linha)
 
             # Registro de Detalhe
             if tipoRegistro == "3":
+                print("Adicionando registro de pagamento...")
                 empresa.adicionarPagamento(linha)
 
         except Exception as erro:
@@ -29,8 +32,13 @@ def tratamentoArquivos(arquivoEntrada, arquivoSaida):
             print(mensagem)
 
     relatorio = Relatorio()
+    print("Criando tabela de empresa...")
     relatorio.montarTabelaEmpresa(empresa)
+
+    print("Criando tabela de pagamentos...")
     relatorio.montarTabelaPagamentos(empresa.listaPagamentos)
+
+    print("Finalizando relatório em HTML...")
     return relatorio.montarHTML(arquivoSaida)
 
 
