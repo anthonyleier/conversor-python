@@ -1,6 +1,6 @@
 import sys
 from classes.empresa import Empresa
-from classes.geradorRelatorio import GeradorRelatorio
+from classes.relatorio import Relatorio
 
 
 def tratamentoArquivos(arquivoEntrada, arquivoSaida):
@@ -28,10 +28,10 @@ def tratamentoArquivos(arquivoEntrada, arquivoSaida):
             mensagem = f"Erro na leitura da linha {linhaAtual}: {erro}"
             print(mensagem)
 
-    geradorRelatorio = GeradorRelatorio()
-    geradorRelatorio.montarTabelaEmpresa(empresa)
-    geradorRelatorio.montarTabelaPagamentos(empresa.listaPagamentos)
-    return geradorRelatorio.montarHTML(arquivoSaida)
+    relatorio = Relatorio()
+    relatorio.montarTabelaEmpresa(empresa)
+    relatorio.montarTabelaPagamentos(empresa.listaPagamentos)
+    return relatorio.montarHTML(arquivoSaida)
 
 
 if __name__ == "__main__":

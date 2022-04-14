@@ -1,4 +1,4 @@
-class GeradorRelatorio():
+class Relatorio():
     def __init__(self):
         self.html = "<html><body>"
         self.css = "<style> table, th, td { border: 1px solid black; } </style>"
