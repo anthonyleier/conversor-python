@@ -54,8 +54,15 @@ class Relatorio():
 
     def montarHTML(self, caminho):
         self.html += self.css + "</body></html>"
-        with open(caminho, 'w', encoding='utf-8') as arquivo:
-            arquivo.write(self.html)
+
+        try:
+            with open(caminho, 'w', encoding='utf-8') as arquivo:
+                arquivo.write(self.html)
+
+        except Exception as erro:
+            mensagem = f"Não foi possível gravar o arquivo de saída ({caminho}): {erro}"
+            print(mensagem)
+
         return self.html
 
     def __str__(self):
