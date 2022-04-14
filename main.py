@@ -2,13 +2,8 @@ import sys
 from classes.empresa import Empresa
 from classes.geradorRelatorio import GeradorRelatorio
 
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        sys.exit("Exemplo de uso: python main.py entrada.txt saida.html")
 
-    arquivoEntrada = sys.argv[1]
-    arquivoSaida = sys.argv[2]
-
+def tratamentoArquivos(arquivoEntrada, arquivoSaida):
     with open(arquivoEntrada, 'r', encoding='utf-8') as arquivo:
         linhasArquivo = arquivo.readlines()
 
@@ -36,4 +31,14 @@ if __name__ == "__main__":
     geradorRelatorio = GeradorRelatorio()
     geradorRelatorio.montarTabelaEmpresa(empresa)
     geradorRelatorio.montarTabelaPagamentos(empresa.listaPagamentos)
-    geradorRelatorio.montarHTML(arquivoSaida)
+    return geradorRelatorio.montarHTML(arquivoSaida)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        sys.exit("Exemplo de uso: python main.py entrada.txt saida.html")
+
+    arquivoEntrada = sys.argv[1]
+    arquivoSaida = sys.argv[2]
+
+    tratamentoArquivos(arquivoEntrada, arquivoSaida)

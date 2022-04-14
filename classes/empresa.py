@@ -20,11 +20,7 @@ class Empresa():
         self.cep = f"{self.cepBase}-{self.cepComplemento}"
 
     def adicionarPagamento(self, dadosArquivo):
-        pagamento = Pagamento()
-        pagamento.nomeFavorecido = formatarTexto(dadosArquivo[43:73])
-        pagamento.data = formatarData(dadosArquivo[93:101])
-        pagamento.valor = formatarMoeda(dadosArquivo[119:134])
-        pagamento.numero = dadosArquivo[73:93]
+        pagamento = Pagamento(dadosArquivo)
         pagamento.forma = self.formaPagamento
         self.listaPagamentos.append(pagamento)
 
