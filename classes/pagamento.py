@@ -6,7 +6,7 @@ class Pagamento():
         self.nomeFavorecido = formatarTexto(dadosArquivo[43:73])
         self.data = formatarData(dadosArquivo[93:101])
         self.valor = formatarMoeda(dadosArquivo[119:134])
-        self.numero = dadosArquivo[73:93]
+        self.numero = formatarTexto(dadosArquivo[73:93])
         self.forma = "Desconhecido"
 
     def __str__(self):
