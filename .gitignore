@@ -1,7 +1,3 @@
-# Outputs
-saida.html
-saida_teste.html
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -6,18 +6,21 @@ from classes.pagamento import Pagamento
 from formatar import formatarTexto, formatarCNPJ
 from formatar import formatarFormaPagamento, formatarData, formatarMoeda
 
-arquivoTeste = 'entrada.txt'
+arquivoEntradaTeste = 'files/entrada.txt'
+arquivoSaidaTeste = 'files/saida_teste.html'
+
+arquivoSaidaCorreto = 'files/resposta.html'
 
 
 def lerLinha(index):
     index -= 1
-    with open(arquivoTeste, 'r', encoding='utf-8') as arquivo:
+    with open(arquivoEntradaTeste, 'r', encoding='utf-8') as arquivo:
         linhas = arquivo.readlines()
     return linhas[index]
 
 
 def lerResposta():
-    with open('resposta.html', 'r', encoding='utf-8') as arquivo:
+    with open(arquivoSaidaCorreto, 'r', encoding='utf-8') as arquivo:
         dados = arquivo.read()
     return dados
 
@@ -119,7 +122,7 @@ class RelatorioTestes(unittest.TestCase):
     def teste_montarHTML(self):
         self.relatorio.montarTabelaEmpresa(self.empresa)
         self.relatorio.montarTabelaPagamentos(self.empresa.listaPagamentos)
-        self.relatorio.montarHTML('saida.html')
+        self.relatorio.montarHTML(arquivoSaidaTeste)
         resposta = lerResposta()
         self.assertIn(removerIdentacao(self.relatorio.html),
                       removerIdentacao(resposta))
@@ -154,9 +157,7 @@ class FormatarTestes(unittest.TestCase):
 
 class MainTestes(unittest.TestCase):
     def test_tratamentoArquivos(self):
-        arquivoEntrada = 'entrada.txt'
-        arquivoSaida = 'saida_teste.html'
-        html = tratamentoArquivos(arquivoEntrada, arquivoSaida)
+        html = tratamentoArquivos(arquivoEntradaTeste, arquivoSaidaTeste)
         resposta = lerResposta()
         self.assertEqual(removerIdentacao(html), removerIdentacao(resposta))
 
