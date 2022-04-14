@@ -34,7 +34,9 @@ class Relatorio():
         conteudo += f"<td>{empresa.estado}</td>"
         conteudo += "</tr>"
 
-        self.html += "<br><table>" + cabecalho + conteudo + "</table><br>"
+        tabela = "<br><table>" + cabecalho + conteudo + "</table><br>"
+        self.html += tabela
+        return tabela
 
     def montarTabelaPagamentos(self, listaPagamentos):
         cabecalho = ""
@@ -56,7 +58,9 @@ class Relatorio():
             conteudo += f"<td>{pagamento.forma}</td>"
             conteudo += "</tr>"
 
-        self.html += "<br><table>" + cabecalho + conteudo + "</table><br>"
+        tabela = "<br><table>" + cabecalho + conteudo + "</table><br>"
+        self.html += tabela
+        return tabela
 
     def montarHTML(self, caminho):
         self.html += self.css + "</body></html>"
