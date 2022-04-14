@@ -56,3 +56,7 @@ class GeradorRelatorio():
         self.html += self.css + "</body></html>"
         with open(caminho, 'w', encoding='utf-8') as arquivo:
             arquivo.write(self.html)
+
+    def __str__(self):
+        string = self.html
+        return string

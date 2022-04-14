@@ -27,3 +27,7 @@ class Empresa():
         pagamento.numero = dadosArquivo[73:93]
         pagamento.forma = self.formaPagamento
         self.listaPagamentos.append(pagamento)
+
+    def __str__(self):
+        string = f"{self.nome} | {self.cnpj} | {self.banco} | {self.listaPagamentos}"
+        return string

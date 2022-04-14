@@ -12,20 +12,26 @@ if __name__ == "__main__":
     with open(arquivoEntrada, 'r', encoding='utf-8') as arquivo:
         linhasArquivo = arquivo.readlines()
 
-    for linha in linhasArquivo:
-        tipoRegistro = linha[7:8]
+    for index, linha in enumerate(linhasArquivo):
+        try:
+            tipoRegistro = linha[7:8]
 
-        # Header de Arquivo
-        if tipoRegistro == "0":
-            empresa = Empresa(linha)
+            # Header de Arquivo
+            if tipoRegistro == "0":
+                empresa = Empresa(linha)
 
-        # Header de Lote
-        if tipoRegistro == "1":
-            empresa.inserirEndereco(linha)
+            # Header de Lote
+            if tipoRegistro == "1":
+                empresa.inserirEndereco(linha)
 
-        # Registro de Detalhe
-        if tipoRegistro == "3":
-            empresa.adicionarPagamento(linha)
+            # Registro de Detalhe
+            if tipoRegistro == "3":
+                empresa.adicionarPagamento(linha)
+
+        except Exception as erro:
+            linhaAtual = index + 1
+            mensagem = f"Erro na leitura da linha {linhaAtual}: {erro}"
+            print(mensagem)
 
     geradorRelatorio = GeradorRelatorio()
     geradorRelatorio.montarTabelaEmpresa(empresa)
