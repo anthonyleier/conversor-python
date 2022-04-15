@@ -13,11 +13,11 @@ class Empresa():
         self.rua = formatarTexto(dadosArquivo[142:172])
         self.numero = formatarTexto(dadosArquivo[172:177])
         self.cidade = formatarTexto(dadosArquivo[192:212])
-        self.cepBase = formatarTexto(dadosArquivo[212:217])
-        self.cepComplemento = formatarTexto(dadosArquivo[217:220])
         self.estado = formatarTexto(dadosArquivo[220:222])
         self.formaPagamento = formatarFormaPagamento(dadosArquivo[11:13])
-        self.cep = f"{self.cepBase}-{self.cepComplemento}"
+        cepBase = formatarTexto(dadosArquivo[212:217])
+        cepComplemento = formatarTexto(dadosArquivo[217:220])
+        self.cep = f"{cepBase}-{cepComplemento}"
 
     def adicionarPagamento(self, dadosArquivo):
         pagamento = Pagamento(dadosArquivo)
@@ -25,8 +25,5 @@ class Empresa():
         self.listaPagamentos.append(pagamento)
 
     def __str__(self):
-        string = ""
-        string += f"{self.nome} | {self.cnpj}"
-        string += " | "
-        string += f"{self.banco} | {self.listaPagamentos}"
+        string = f"{self.nome} | {self.cnpj}"
         return string

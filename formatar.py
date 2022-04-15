@@ -1,7 +1,8 @@
 import locale
 from datetime import datetime
 
-tipos = {
+
+formasPagamento = {
     '01': 'Crédito em Conta Corrente',
     '02': 'Cheque Pagamento / Administrativo',
     '03': 'DOC/TED',
@@ -37,7 +38,7 @@ def formatarCNPJ(cnpj):
 
 def formatarFormaPagamento(codigo):
     codigo = codigo.strip()
-    return tipos[codigo]
+    return formasPagamento[codigo]
 
 
 def formatarData(data):

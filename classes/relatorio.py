@@ -1,61 +1,63 @@
 class Relatorio():
     def __init__(self):
         self.html = """
-        <style>
-            table, th, td {
-                border: 1px solid black;
-            }
+        <style> table, th, td
+        { border: 1px solid black; }
         </style>
         """
 
     def montarTabelaEmpresa(self, empresa):
-        cabecalho = ""
-        cabecalho += "<tr>"
-        cabecalho += "<th>Nome da Empresa</th>"
-        cabecalho += "<th>Numero de Inscricao da Empresa</th>"
-        cabecalho += "<th>Nome do Banco</th>"
-        cabecalho += "<th>Nome da Rua</th>"
-        cabecalho += "<th>Numero do Local</th>"
-        cabecalho += "<th>Nome da Cidade</th>"
-        cabecalho += "<th>CEP</th>"
-        cabecalho += "<th>Sigla do Estado</th>"
-        cabecalho += "</tr>"
+        cabecalho = f"""
+        <tr>
+            <th>Nome da Empresa</th>
+            <th>Numero de Inscricao da Empresa</th>
+            <th>Nome do Banco</th>
+            <th>Nome da Rua</th>
+            <th>Numero do Local</th>
+            <th>Nome da Cidade</th>
+            <th>CEP</th>
+            <th>Sigla do Estado</th>
+        </tr>
+        """
 
-        conteudo = ""
-        conteudo += "<tr>"
-        conteudo += f"<td>{empresa.nome}</td>"
-        conteudo += f"<td>{empresa.cnpj}</td>"
-        conteudo += f"<td>{empresa.banco}</td>"
-        conteudo += f"<td>{empresa.rua}</td>"
-        conteudo += f"<td>{empresa.numero}</td>"
-        conteudo += f"<td>{empresa.cidade}</td>"
-        conteudo += f"<td>{empresa.cep}</td>"
-        conteudo += f"<td>{empresa.estado}</td>"
-        conteudo += "</tr>"
+        conteudo = f"""
+        <tr>
+            <td>{empresa.nome}</td>
+            <td>{empresa.cnpj}</td>
+            <td>{empresa.banco}</td>
+            <td>{empresa.rua}</td>
+            <td>{empresa.numero}</td>
+            <td>{empresa.cidade}</td>
+            <td>{empresa.cep}</td>
+            <td>{empresa.estado}</td>
+        </tr>
+        """
 
         tabela = "<br><table>" + cabecalho + conteudo + "</table><br>"
         self.html += tabela
         return tabela
 
     def montarTabelaPagamentos(self, listaPagamentos):
-        cabecalho = ""
-        cabecalho += "<tr>"
-        cabecalho += "<th>Nome do Favorecido</th>"
-        cabecalho += "<th>Data de Pagamento</th>"
-        cabecalho += "<th>Valor do Pagamento</th>"
-        cabecalho += "<th>Numero do Documento Atribuido pela Empresa</th>"
-        cabecalho += "<th>Forma de Lancamento</th>"
-        cabecalho += "</tr>"
-
+        cabecalho = f"""
+        <tr>
+            <th>Nome do Favorecido</th>
+            <th>Data de Pagamento</th>
+            <th>Valor do Pagamento</th>
+            <th>Numero do Documento Atribuido pela Empresa</th>
+            <th>Forma de Lancamento</th>
+        </tr>
+        """
         conteudo = ""
         for pagamento in listaPagamentos:
-            conteudo += "<tr>"
-            conteudo += f"<td>{pagamento.nomeFavorecido}</td>"
-            conteudo += f"<td>{pagamento.data}</td>"
-            conteudo += f"<td>{pagamento.valor}</td>"
-            conteudo += f"<td>{pagamento.numero}</td>"
-            conteudo += f"<td>{pagamento.forma}</td>"
-            conteudo += "</tr>"
+            conteudo += f"""
+            <tr>
+                <td>{pagamento.nomeFavorecido}</td>
+                <td>{pagamento.data}</td>
+                <td>{pagamento.valor}</td>
+                <td>{pagamento.numero}</td>
+                <td>{pagamento.forma}</td>
+            </tr>
+            """
 
         tabela = "<br><table>" + cabecalho + conteudo + "</table><br>"
         self.html += tabela
@@ -67,11 +69,10 @@ class Relatorio():
                 arquivo.write(self.html)
 
         except Exception as erro:
-            mensagem = f"Erro ao gravar o arquivo ({caminho}): {erro}"
+            mensagem = f"Erro ao gravar o arquivo {caminho}: {erro}"
             print(mensagem)
 
         return self.html
 
     def __str__(self):
-        string = self.html
-        return string
+        return self.html
