@@ -8,7 +8,6 @@ from formatar import formatarFormaPagamento, formatarData, formatarMoeda
 
 arquivoEntradaTeste = 'files/entrada.txt'
 arquivoSaidaTeste = 'files/saida_teste.html'
-
 arquivoSaidaCorreto = 'files/resposta.html'
 
 
@@ -119,10 +118,10 @@ class RelatorioTestes(unittest.TestCase):
         resposta = lerResposta()
         self.assertIn(removerIdentacao(tabela), removerIdentacao(resposta))
 
-    def teste_montarHTML(self):
+    def teste_criarHTML(self):
         self.relatorio.montarTabelaEmpresa(self.empresa)
         self.relatorio.montarTabelaPagamentos(self.empresa.listaPagamentos)
-        self.relatorio.montarHTML(arquivoSaidaTeste)
+        self.relatorio.criarHTML(arquivoSaidaTeste)
         resposta = lerResposta()
         self.assertIn(removerIdentacao(self.relatorio.html),
                       removerIdentacao(resposta))

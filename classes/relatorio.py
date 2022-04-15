@@ -1,7 +1,6 @@
 class Relatorio():
     def __init__(self):
-        self.html = "<html><body>"
-        self.css = """
+        self.html = """
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -62,9 +61,7 @@ class Relatorio():
         self.html += tabela
         return tabela
 
-    def montarHTML(self, caminho):
-        self.html += self.css + "</body></html>"
-
+    def criarHTML(self, caminho):
         try:
             with open(caminho, 'w', encoding='utf-8') as arquivo:
                 arquivo.write(self.html)

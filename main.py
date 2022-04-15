@@ -40,7 +40,7 @@ def tratamentoArquivos(arquivoEntrada, arquivoSaida):
     relatorio.montarTabelaPagamentos(empresa.listaPagamentos)
 
     print("Finalizando relatório em HTML...")
-    return relatorio.montarHTML(arquivoSaida)
+    return relatorio.criarHTML(arquivoSaida)
 
 
 if __name__ == "__main__":
