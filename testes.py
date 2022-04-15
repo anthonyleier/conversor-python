@@ -6,6 +6,7 @@ from classes.pagamento import Pagamento
 from formatar import formatarTexto, formatarCNPJ
 from formatar import formatarFormaPagamento, formatarData, formatarMoeda
 
+
 arquivoEntradaTeste = 'files/entrada.txt'
 arquivoSaidaTeste = 'files/saida_teste.html'
 arquivoSaidaCorreto = 'files/resposta.html'

@@ -4,9 +4,19 @@ from classes.empresa import Empresa
 from classes.relatorio import Relatorio
 
 
+def coletarLinhasArquivo(caminho):
+    try:
+        with open(caminho, 'r', encoding='utf-8') as arquivo:
+            linhas = arquivo.readlines()
+            return linhas
+
+    except Exception as erro:
+        mensagem = f"Erro ao ler o arquivo {caminho}: {erro}"
+        print(mensagem)
+
+
 def tratamentoArquivos(arquivoEntrada, arquivoSaida):
-    with open(arquivoEntrada, 'r', encoding='utf-8') as arquivo:
-        linhasArquivo = arquivo.readlines()
+    linhasArquivo = coletarLinhasArquivo(arquivoEntrada)
 
     for index, linha in enumerate(linhasArquivo):
         try:
