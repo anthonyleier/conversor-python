@@ -83,7 +83,7 @@ class EmpresaTestes(unittest.TestCase):
         self.assertEqual(self.empresa.cidade, 'Centro-Florianopolis')
         self.assertEqual(self.empresa.estado, 'SC')
         self.assertEqual(self.empresa.formaPagamento,
-                         'Crédito em Conta Corrente')
+                         'Credito em Conta Corrente')
         self.assertEqual(self.empresa.cep, '88015-190')
 
     def teste_adicionarPagamento(self):

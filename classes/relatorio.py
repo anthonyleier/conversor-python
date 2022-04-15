@@ -1,10 +1,6 @@
 class Relatorio():
     def __init__(self):
-        self.html = """
-        <style> table, th, td
-        { border: 1px solid black; }
-        </style>
-        """
+        self.html = "<html><body>"
 
     def montarTabelaEmpresa(self, empresa):
         cabecalho = f"""
@@ -33,7 +29,7 @@ class Relatorio():
         </tr>
         """
 
-        tabela = "<br><table>" + cabecalho + conteudo + "</table><br>"
+        tabela = '<table border="1">' + cabecalho + conteudo + "</table><br/>"
         self.html += tabela
         return tabela
 
@@ -59,11 +55,13 @@ class Relatorio():
             </tr>
             """
 
-        tabela = "<br><table>" + cabecalho + conteudo + "</table><br>"
+        tabela = '<table border="1">' + cabecalho + conteudo + "</table>"
         self.html += tabela
         return tabela
 
     def criarHTML(self, caminho):
+        self.html += "</body></html>"
+
         try:
             with open(caminho, 'w', encoding='utf-8') as arquivo:
                 arquivo.write(self.html)

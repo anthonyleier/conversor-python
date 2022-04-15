@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 formasPagamento = {
-    '01': 'Crédito em Conta Corrente',
+    '01': 'Credito em Conta Corrente',
     '02': 'Cheque Pagamento / Administrativo',
     '03': 'DOC/TED',
     '04': 'Cartão Salário',
