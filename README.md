@@ -1,5 +1,4 @@
-# Teste Técnico - Grupo Nexxees
-### Anthony Cruz - 15/04/2022
+# Conversor Python
 
 Desenvolvimento de um programa utilizando a linguagem Python para a leitura e interpretação de um arquivo de texto (.txt) e geração automatizada de relatório com base nas informações obtidas. Para este projeto e seus respectivos testes foram utilizadas apenas bibliotecas nativas da linguagem. Todos os arquivos Python estão dentro das normas da PEP 8.
 
